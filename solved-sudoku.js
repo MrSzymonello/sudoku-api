@@ -22,6 +22,57 @@ module.exports.get_solved = () => {
     return solved_sudoku_seed;
 };
 
+module.exports.get_solved_with_one_element_fixed = (startValue, startIndex) => {
+    
+    var row = Math.floor(startIndex / 9);
+    var column = startIndex - Math.floor(startIndex / 9) * 9;
+    var gridRow = Math.floor(row / 3);
+    var gridColumn = Math.floor(column / 3);
+
+    solved_sudoku = this.get_solved();
+
+    // walk through 9 elements within the grid
+    var targetRow = -1;
+    var targetColumn = -1;
+
+    for(rowIndexInGrid = 0; rowIndexInGrid < 3; rowIndexInGrid++) {
+        for(columnIndexInGrid = 0; columnIndexInGrid < 3; columnIndexInGrid++) {
+            var r = rowIndexInGrid + gridRow * 3;
+            var c = columnIndexInGrid + gridColumn * 3;            
+            var indexInGrid = c + r * 9;
+            
+            if (solved_sudoku[indexInGrid] == startValue) {
+                targetRow = r;
+                targetColumn = c;
+                break;
+            }
+        }
+        if (targetRow != -1) break;
+    }
+
+    if (targetRow == row && targetColumn == column) {
+        // no need for swap
+        return solved_sudoku;
+    }
+
+    if (targetColumn == column) {
+        // one row swap necessary
+        swapRows(targetRow, row, solved_sudoku);
+        return solved_sudoku;
+    }
+
+    if (targetRow == row) {
+        // one column swap necessary
+        swapColumns(targetColumn, column, solved_sudoku);
+        return solved_sudoku;
+    }
+
+    // two swaps necessary
+    swapRows(targetRow, row, solved_sudoku);
+    swapColumns(targetColumn, column, solved_sudoku);
+    return solved_sudoku;
+};
+
 function randomlySwapColumns(columnGrid, iterations, board) {
     for(i = 0; i < iterations; i++) {
         var column1 = columnGrid * 3 + Math.floor(Math.random() * 3);

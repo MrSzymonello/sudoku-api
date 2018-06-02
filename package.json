@@ -1,0 +1,16 @@
+{
+  "name": "sudoku-api",
+  "version": "0.0.1",
+  "description": "Sudoku API",
+  "scripts": {
+    "test": "mocha tests/*.test.js"
+  },
+  "author": "Szymon Szyszko",
+  "dependencies": {
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  }
+}

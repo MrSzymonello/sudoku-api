@@ -5,6 +5,12 @@ var server = http.createServer(app);
 const { get_solved, get_solved_with_one_element_fixed } = require('./solved-sudoku');
 const port = 8080;
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.get('/sudoku/board', (req, res) => {
     var value = req.query.value;
     var index = req.query.index;

@@ -1,1 +1,1 @@
-# sudoku-api
+# Sudoku API [![CircleCI](https://circleci.com/gh/MrSzymonello/sudoku-api.svg?style=shield)](https://circleci.com/gh/MrSzymonello/sudoku-api)

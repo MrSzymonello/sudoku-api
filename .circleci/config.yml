@@ -30,3 +30,9 @@ jobs:
       - run:
           name: Testing
           command: npm run test
+
+      # build and push Docker image
+      - setup_remote_docker
+      - run: |
+          chmod a+x scripts/docker-publish.sh
+          scripts/docker-publish.sh
